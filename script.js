@@ -252,11 +252,20 @@
       var touch = e.touches[0];
       var scrollZone = 60; // px from left edge reserved for scrolling
 
+      // Let taps on interactive elements (links, buttons) work normally
+      if (touch.target.closest('a, button, input, textarea')) {
+        touchDrawing = false;
+        return;
+      }
+
       if (touch.clientX < scrollZone) {
         // Finger near left edge — let the browser scroll normally
         touchDrawing = false;
         return;
       }
+
+      // Claim the touch so the browser doesn't scroll
+      e.preventDefault();
 
       // Start drawing
       touchDrawing = true;
@@ -271,7 +280,7 @@
         permanent: true,
       };
       strokes.push(currentStroke);
-    }, { passive: true });
+    }, { passive: false });
 
     heroSection.addEventListener('touchmove', function (e) {
       if (!touchDrawing || e.touches.length !== 1) return;
