@@ -258,8 +258,8 @@
         return;
       }
 
-      if (touch.clientX < scrollZone) {
-        // Finger near left edge — let the browser scroll normally
+      if (touch.clientX < scrollZone || touch.clientX > window.innerWidth - scrollZone) {
+        // Finger near left or right edge — let the browser scroll normally
         touchDrawing = false;
         return;
       }
