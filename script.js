@@ -242,6 +242,70 @@
       currentStroke = null;
     });
 
+    // --- Touch event handlers (mobile / tablet drawing) ---
+
+    var touchDrawing = false; // true when current touch is a draw gesture
+
+    heroSection.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) return;
+
+      var touch = e.touches[0];
+      var scrollZone = 60; // px from left edge reserved for scrolling
+
+      if (touch.clientX < scrollZone) {
+        // Finger near left edge — let the browser scroll normally
+        touchDrawing = false;
+        return;
+      }
+
+      // Start drawing
+      touchDrawing = true;
+      var rect = heroCanvas.getBoundingClientRect();
+      mouse.x = touch.clientX - rect.left;
+      mouse.y = touch.clientY - rect.top;
+      mouse.active = true;
+      mouseDown = true;
+
+      currentStroke = {
+        points: [{ x: mouse.x, y: mouse.y, t: Date.now() }],
+        permanent: true,
+      };
+      strokes.push(currentStroke);
+    }, { passive: true });
+
+    heroSection.addEventListener('touchmove', function (e) {
+      if (!touchDrawing || e.touches.length !== 1) return;
+
+      e.preventDefault(); // block scroll while drawing
+
+      var touch = e.touches[0];
+      var rect = heroCanvas.getBoundingClientRect();
+      mouse.x = touch.clientX - rect.left;
+      mouse.y = touch.clientY - rect.top;
+      mouse.active = true;
+
+      var now = Date.now();
+      if (currentStroke) {
+        currentStroke.points.push({ x: mouse.x, y: mouse.y, t: now });
+      }
+    }, { passive: false }); // passive:false needed for preventDefault
+
+    heroSection.addEventListener('touchend', function () {
+      if (touchDrawing) {
+        mouseDown = false;
+        mouse.active = false;
+        currentStroke = null;
+        touchDrawing = false;
+      }
+    });
+
+    heroSection.addEventListener('touchcancel', function () {
+      mouseDown = false;
+      mouse.active = false;
+      currentStroke = null;
+      touchDrawing = false;
+    });
+
     // --- Sketch stroke rendering ---
 
     function renderStrokes() {
