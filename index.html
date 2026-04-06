@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional 3D & 2D Artist Portfolio">
+  <title>Bahaa — 3D & 2D Artist</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================
+       NAVBAR
+       ============================================ -->
+  <nav class="navbar" id="navbar" aria-label="Main navigation">
+    <div class="nav-container">
+      <!-- EDIT NAME HERE -->
+      <a href="#hero" class="nav-logo" aria-label="Home">Bahaa</a>
+
+      <!-- Desktop Navigation -->
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="#hero" role="menuitem">Home</a></li>
+        <li role="none"><a href="#portfolio-3d" role="menuitem">3D Work</a></li>
+        <li role="none"><a href="#portfolio-2d" role="menuitem">2D Work</a></li>
+        <li role="none"><a href="#about" role="menuitem">About</a></li>
+        <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Clear Sketch Button -->
+        <button class="clear-sketch-btn" id="clearSketch" aria-label="Clear sketch">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Sparkle wand / magic clean icon -->
+            <path d="M12 2l1.09 3.26L16.36 6.5l-3.27 1.09L12 10.86l-1.09-3.27L7.64 6.5l3.27-1.24z"></path>
+            <path d="M5 17l0.72 2.16L7.88 19.88l-2.16 0.72L5 22.76l-0.72-2.16L2.12 19.88l2.16-0.72z"></path>
+            <path d="M19 13l0.54 1.62 1.62 0.54-1.62 0.54L19 17.32l-0.54-1.62-1.62-0.54 1.62-0.54z"></path>
+          </svg>
+          <span>Clear</span>
+        </button>
+
+        <!-- Save Sketch Button -->
+        <button class="clear-sketch-btn" id="saveSketch" aria-label="Save sketch">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          <span>Save</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Hamburger Menu Button (Mobile) -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Slide-in Panel -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <ul role="menu">
+        <li role="none"><a href="#hero" role="menuitem">Home</a></li>
+        <li role="none"><a href="#portfolio-3d" role="menuitem">3D Work</a></li>
+        <li role="none"><a href="#portfolio-2d" role="menuitem">2D Work</a></li>
+        <li role="none"><a href="#about" role="menuitem">About</a></li>
+        <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero" id="hero">
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <canvas class="sketch-canvas" id="sketchCanvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <!-- EDIT NAME HERE -->
+      <h1 class="hero-title">Bahaa</h1>
+      <p class="hero-subtitle">3D &amp; 2D Artist</p>
+      <div class="hero-buttons">
+        <a href="#portfolio-3d" class="btn btn-primary">View 3D Work</a>
+        <a href="#portfolio-2d" class="btn btn-secondary">View 2D Work</a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span></span>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       3D PORTFOLIO SECTION
+       ============================================ -->
+  <section class="section" id="portfolio-3d">
+    <div class="container">
+      <h2 class="section-title">3D Portfolio</h2>
+      <p class="section-subtitle">Explore my three-dimensional creations</p>
+
+      <div class="grid-3d">
+
+        <!-- ADD PROJECT — Copy this card block to add more 3D projects -->
+        <article class="card-3d" tabindex="0" aria-label="Shirt — 3D Clothing">
+          <div class="card-3d__preview">
+            <img src="3D Art/Clothing/Shirt_01.PNG" alt="3D Shirt design made with Style3D" loading="lazy">
+          </div>
+          <div class="card-3d__info">
+            <h3>Shirt Design</h3>
+            <p>3D clothing design — shirt modeled and simulated in Style3D.</p>
+            <div class="card-3d__tags">
+              <span class="tag">Style3D</span>
+              <span class="tag">Clothing</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-3d" tabindex="0" aria-label="Tank Top — 3D Clothing">
+          <div class="card-3d__preview">
+            <img src="3D Art/Clothing/TankTop_03.PNG" alt="3D Tank Top design made with Style3D" loading="lazy">
+          </div>
+          <div class="card-3d__info">
+            <h3>Tank Top Design</h3>
+            <p>3D clothing design — tank top modeled and simulated in Style3D.</p>
+            <div class="card-3d__tags">
+              <span class="tag">Style3D</span>
+              <span class="tag">Clothing</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-3d" tabindex="0" aria-label="3D Project 3">
+          <div class="card-3d__preview">
+            <div class="card-3d__placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3z"/><path d="M12 12l9-4.5"/><path d="M12 12v9"/><path d="M12 12L3 7.5"/></svg>
+              <span>3D Preview</span>
+            </div>
+          </div>
+          <div class="card-3d__info">
+            <h3>Project Title</h3>
+            <p>Brief description of this 3D project, tools used, and concept behind it.</p>
+            <div class="card-3d__tags">
+              <span class="tag">Cinema 4D</span>
+              <span class="tag">Redshift</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-3d" tabindex="0" aria-label="3D Project 4">
+          <div class="card-3d__preview">
+            <div class="card-3d__placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3z"/><path d="M12 12l9-4.5"/><path d="M12 12v9"/><path d="M12 12L3 7.5"/></svg>
+              <span>3D Preview</span>
+            </div>
+          </div>
+          <div class="card-3d__info">
+            <h3>Project Title</h3>
+            <p>Brief description of this 3D project, tools used, and concept behind it.</p>
+            <div class="card-3d__tags">
+              <span class="tag">Unreal Engine</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-3d" tabindex="0" aria-label="3D Project 5">
+          <div class="card-3d__preview">
+            <div class="card-3d__placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3z"/><path d="M12 12l9-4.5"/><path d="M12 12v9"/><path d="M12 12L3 7.5"/></svg>
+              <span>3D Preview</span>
+            </div>
+          </div>
+          <div class="card-3d__info">
+            <h3>Project Title</h3>
+            <p>Brief description of this 3D project, tools used, and concept behind it.</p>
+            <div class="card-3d__tags">
+              <span class="tag">Houdini</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-3d" tabindex="0" aria-label="3D Project 6">
+          <div class="card-3d__preview">
+            <div class="card-3d__placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3z"/><path d="M12 12l9-4.5"/><path d="M12 12v9"/><path d="M12 12L3 7.5"/></svg>
+              <span>3D Preview</span>
+            </div>
+          </div>
+          <div class="card-3d__info">
+            <h3>Project Title</h3>
+            <p>Brief description of this 3D project, tools used, and concept behind it.</p>
+            <div class="card-3d__tags">
+              <span class="tag">Blender</span>
+              <span class="tag">Cycles</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       2D PORTFOLIO SECTION
+       ============================================ -->
+  <section class="section section-alt" id="portfolio-2d">
+    <div class="container">
+      <h2 class="section-title">2D Portfolio</h2>
+      <p class="section-subtitle">Illustrations, concept art, and digital paintings</p>
+
+      <div class="grid-2d">
+
+        <!-- ADD PROJECT — Copy this item block to add more 2D projects -->
+        <article class="card-2d card-2d--tall" tabindex="0" aria-label="2D Project 1">
+          <!-- REPLACE IMAGE — Replace the placeholder with your artwork -->
+          <div class="card-2d__image">
+            <div class="card-2d__placeholder" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          </div>
+          <div class="card-2d__overlay">
+            <h3>Artwork Title</h3>
+            <p>Digital Painting</p>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-2d" tabindex="0" aria-label="2D Project 2">
+          <div class="card-2d__image">
+            <div class="card-2d__placeholder" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          </div>
+          <div class="card-2d__overlay">
+            <h3>Artwork Title</h3>
+            <p>Concept Art</p>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-2d" tabindex="0" aria-label="2D Project 3">
+          <div class="card-2d__image">
+            <div class="card-2d__placeholder" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          </div>
+          <div class="card-2d__overlay">
+            <h3>Artwork Title</h3>
+            <p>Illustration</p>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-2d card-2d--tall" tabindex="0" aria-label="2D Project 4">
+          <div class="card-2d__image">
+            <div class="card-2d__placeholder" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          </div>
+          <div class="card-2d__overlay">
+            <h3>Artwork Title</h3>
+            <p>Character Design</p>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-2d" tabindex="0" aria-label="2D Project 5">
+          <div class="card-2d__image">
+            <div class="card-2d__placeholder" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          </div>
+          <div class="card-2d__overlay">
+            <h3>Artwork Title</h3>
+            <p>Environment Art</p>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-2d" tabindex="0" aria-label="2D Project 6">
+          <div class="card-2d__image">
+            <div class="card-2d__placeholder" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          </div>
+          <div class="card-2d__overlay">
+            <h3>Artwork Title</h3>
+            <p>UI/Visual Design</p>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-2d card-2d--wide" tabindex="0" aria-label="2D Project 7">
+          <div class="card-2d__image">
+            <div class="card-2d__placeholder" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          </div>
+          <div class="card-2d__overlay">
+            <h3>Artwork Title</h3>
+            <p>Matte Painting</p>
+          </div>
+        </article>
+
+        <!-- ADD PROJECT -->
+        <article class="card-2d" tabindex="0" aria-label="2D Project 8">
+          <div class="card-2d__image">
+            <div class="card-2d__placeholder" style="background: linear-gradient(135deg, #89f7fe, #66a6ff);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          </div>
+          <div class="card-2d__overlay">
+            <h3>Artwork Title</h3>
+            <p>Sketch</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       ABOUT SECTION
+       ============================================ -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+
+      <div class="about-grid">
+        <!-- Left: Profile Image -->
+        <div class="about-image">
+          <!-- REPLACE IMAGE — Replace with your profile photo -->
+          <div class="about-image__placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Bahaa's Photo</span>
+          </div>
+        </div>
+
+        <!-- Right: Bio, Skills, Tools -->
+        <div class="about-content">
+          <!-- EDIT BIO -->
+          <div class="about-bio">
+            <h3>Hello! I'm <strong>Bahaa</strong></h3>
+            <p>
+              I'm a passionate 3D and 2D artist with a love for creating immersive worlds,
+              compelling characters, and stunning visual experiences. With experience across
+              multiple industries including gaming, film, and advertising, I bring ideas to
+              life through art and technology.
+            </p>
+            <p>
+              <!-- EDIT BIO — Add more about yourself, your journey, and what drives your art -->
+              My work blends traditional art fundamentals with cutting-edge digital tools
+              to produce artwork that tells stories and evokes emotion.
+            </p>
+          </div>
+
+          <!-- EDIT SKILLS -->
+          <div class="about-skills">
+            <h4>Skills</h4>
+            <div class="skills-list">
+              <span class="skill-tag">3D Modeling</span>
+              <span class="skill-tag">Texturing</span>
+              <span class="skill-tag">Sculpting</span>
+              <span class="skill-tag">Rigging</span>
+              <span class="skill-tag">Animation</span>
+              <span class="skill-tag">Concept Art</span>
+              <span class="skill-tag">Digital Painting</span>
+              <span class="skill-tag">Character Design</span>
+              <span class="skill-tag">Environment Design</span>
+              <span class="skill-tag">Lighting</span>
+              <span class="skill-tag">Compositing</span>
+            </div>
+          </div>
+
+          <!-- EDIT TOOLS -->
+          <div class="about-tools">
+            <h4>Tools</h4>
+            <div class="tools-list">
+              <span class="tool-tag">Blender</span>
+              <span class="tool-tag">ZBrush</span>
+              <span class="tool-tag">Maya</span>
+              <span class="tool-tag">Substance Painter</span>
+              <span class="tool-tag">Photoshop</span>
+              <span class="tool-tag">Procreate</span>
+              <span class="tool-tag">Unreal Engine</span>
+              <span class="tool-tag">After Effects</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       CONTACT SECTION
+       ============================================ -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-subtitle">Have a project in mind? Let's create something amazing together.</p>
+
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="contactName">Name</label>
+            <input type="text" id="contactName" name="name" placeholder="Your name" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" name="email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" name="message" rows="6" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+        </form>
+
+        <!-- Social Links -->
+        <div class="contact-info">
+          <h3>Connect With Me</h3>
+          <p>Feel free to reach out through social media or send me a message using the form.</p>
+
+          <!-- EDIT SOCIAL LINKS — Replace # with your profile URLs -->
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="ArtStation" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 17.723l2.027 3.505h.001a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24-3.665c0-.515-.154-1.023-.452-1.458L15.97 1.39a2.424 2.424 0 0 0-2.164-1.333H9.78l11.776 20.394 1.673-2.896A2.43 2.43 0 0 0 24 14.058zM4.836 13.544l5.248-9.09 5.248 9.09H4.836z"/></svg>
+              <span>ArtStation</span>
+            </a>
+            <a href="#" class="social-link" aria-label="Behance" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988H0V5.021h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 6.053-2.207 7.061zM2.917 11.241h4.594c3.76 0 3.36-4.384 0-4.384H2.917v4.384zm0 6.912h4.861c4.036 0 3.9-4.968 0-4.968H2.917v4.968z"/></svg>
+              <span>Behance</span>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              <span>Instagram</span>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span>Twitter / X</span>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="mailto:your@email.com" class="social-link" aria-label="Email">
+              <!-- EDIT EMAIL — Change href above -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>Email</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <!-- EDIT NAME HERE -->
+        <p>&copy; 2026 <strong>Bahaa</strong>. All rights reserved.</p>
+      </div>
+      <div class="footer-right">
+        <a href="#hero">Back to Top</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================
+       FULLSCREEN MODAL (for viewing projects)
+       ============================================ -->
+  <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project preview">
+    <button class="modal__close" id="modalClose" aria-label="Close preview">&times;</button>
+    <div class="modal__content" id="modalContent">
+      <!-- Dynamic content injected by JS -->
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
