@@ -416,21 +416,27 @@ input, textarea {
 }
 
 
-/* Scroll Indicator */
-.hero-scroll-indicator {
+/* Hero Hints (scroll + draw) */
+.hero-hints {
   position: absolute;
   bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
   opacity: 1;
   transition: opacity 0.4s ease;
 }
 
-.hero-scroll-indicator.hidden {
+.hero-hints.hidden {
   opacity: 0;
   pointer-events: none;
 }
+
+/* Scroll Indicator */
+.hero-scroll-indicator {}
 
 .hero-scroll-indicator span {
   display: block;
@@ -459,8 +465,41 @@ input, textarea {
   50% { top: 20px; opacity: 0.3; }
 }
 
+/* Draw Hint */
+.hero-draw-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+}
+
+.hero-draw-hint .mouse-icon {
+  width: 20px;
+  height: 32px;
+}
+
+.hero-draw-hint .mouse-icon .left-click {
+  animation: clickPulse 2s infinite;
+}
+
+.hero-draw-hint span {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes clickPulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.9; }
+}
+
 /* Swipe gesture icon on touch devices (smartphones & tablets) */
 @media (pointer: coarse) {
+  .hero-draw-hint {
+    display: none;
+  }
+
   .hero-scroll-indicator span {
     width: 20px;
     height: 44px;

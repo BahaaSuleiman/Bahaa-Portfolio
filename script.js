@@ -22,7 +22,7 @@
   const modal = document.getElementById('projectModal');
   const modalClose = document.getElementById('modalClose');
   const modalContent = document.getElementById('modalContent');
-  const scrollIndicator = document.querySelector('.hero-scroll-indicator');
+  const scrollIndicator = document.querySelector('.hero-hints');
 
 
   /* ------------------------------------------
