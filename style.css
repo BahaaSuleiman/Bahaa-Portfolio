@@ -190,7 +190,7 @@ input, textarea {
 .nav-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 48px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -198,6 +198,7 @@ input, textarea {
 }
 
 .nav-logo {
+  flex: 1;
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-primary);
@@ -241,8 +242,10 @@ input, textarea {
 }
 
 .nav-actions {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
 }
 
@@ -909,6 +912,10 @@ input, textarea {
 @media (max-width: 767px) {
   :root {
     --nav-height: 60px;
+  }
+
+  .nav-container {
+    padding: 0 24px;
   }
 
   .section {
