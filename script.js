@@ -345,9 +345,34 @@
       sketchCtx.lineJoin = 'round';
 
       strokes.forEach(function (stroke) {
-        if (stroke.points.length < 2) return;
+        const pts = stroke.points;
+        if (pts.length < 2) return;
 
         const isPermanent = stroke.permanent;
+
+        // Calculate average speed for consistent line width across the stroke
+        var totalDist = 0;
+        for (var i = 1; i < pts.length; i++) {
+          var dx = pts[i].x - pts[i - 1].x;
+          var dy = pts[i].y - pts[i - 1].y;
+          totalDist += Math.sqrt(dx * dx + dy * dy);
+        }
+        var avgSpeed = totalDist / (pts.length - 1);
+        var lineWidth = isPermanent
+          ? Math.max(1.5, Math.min(3.5, 5 - avgSpeed * 0.08))
+          : Math.max(1, Math.min(2.5, 4 - avgSpeed * 0.1));
+
+        // Single opacity per stroke
+        var opacity = isPermanent ? 0.6 : 0.4;
+        if (!isPermanent) {
+          var newestAge = now - pts[pts.length - 1].t;
+          var oldestAge = now - pts[0].t;
+          var age = (newestAge + oldestAge) / 2;
+          if (age >= fadeTime) return;
+          if (age > fadeTime - fadeDuration) {
+            opacity *= (fadeTime - age) / fadeDuration;
+          }
+        }
 
         // Subtle glow for permanent strokes
         if (isPermanent) {
@@ -360,35 +385,36 @@
           sketchCtx.shadowBlur = 0;
         }
 
-        for (let i = 1; i < stroke.points.length; i++) {
-          const p0 = stroke.points[i - 1];
-          const p1 = stroke.points[i];
+        sketchCtx.strokeStyle = 'rgba(' + strokeColor + ', ' + opacity + ')';
+        sketchCtx.lineWidth = lineWidth;
 
-          let opacity = isPermanent ? 0.6 : 0.4;
+        // Draw smooth curve using quadratic bezier through midpoints
+        sketchCtx.beginPath();
+        sketchCtx.moveTo(pts[0].x, pts[0].y);
 
-          if (!isPermanent) {
-            const age = now - p0.t;
-            if (age >= fadeTime) continue;
-            if (age > fadeTime - fadeDuration) {
-              opacity *= (fadeTime - age) / fadeDuration;
-            }
+        if (pts.length === 2) {
+          sketchCtx.lineTo(pts[1].x, pts[1].y);
+        } else {
+          // First segment: line to midpoint of first two points
+          var midX = (pts[0].x + pts[1].x) / 2;
+          var midY = (pts[0].y + pts[1].y) / 2;
+          sketchCtx.lineTo(midX, midY);
+
+          // Middle segments: quadratic bezier using actual points as controls
+          for (var i = 1; i < pts.length - 1; i++) {
+            var cpX = pts[i].x;
+            var cpY = pts[i].y;
+            midX = (pts[i].x + pts[i + 1].x) / 2;
+            midY = (pts[i].y + pts[i + 1].y) / 2;
+            sketchCtx.quadraticCurveTo(cpX, cpY, midX, midY);
           }
 
-          // Width varies with speed: thinner when fast, thicker when slow
-          const sdx = p1.x - p0.x;
-          const sdy = p1.y - p0.y;
-          const speed = Math.sqrt(sdx * sdx + sdy * sdy);
-          const lineWidth = isPermanent
-            ? Math.max(1.5, Math.min(3.5, 5 - speed * 0.08))
-            : Math.max(1, Math.min(2.5, 4 - speed * 0.1));
-
-          sketchCtx.beginPath();
-          sketchCtx.moveTo(p0.x, p0.y);
-          sketchCtx.lineTo(p1.x, p1.y);
-          sketchCtx.strokeStyle = 'rgba(' + strokeColor + ', ' + opacity + ')';
-          sketchCtx.lineWidth = lineWidth;
-          sketchCtx.stroke();
+          // Last segment: line to final point
+          var last = pts[pts.length - 1];
+          sketchCtx.lineTo(last.x, last.y);
         }
+
+        sketchCtx.stroke();
       });
 
       // Reset shadow state
