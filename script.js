@@ -22,8 +22,6 @@
   const modal = document.getElementById('projectModal');
   const modalClose = document.getElementById('modalClose');
   const modalContent = document.getElementById('modalContent');
-  const contactForm = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
 
 
   /* ------------------------------------------
@@ -570,7 +568,7 @@
   function initScrollReveal() {
     // Mark elements for animation
     const targets = document.querySelectorAll(
-      '.card-3d, .card-2d, .about-grid, .contact-grid, .section-title, .section-subtitle'
+      '.card-3d, .card-2d, .about-grid, .section-title, .section-subtitle'
     );
 
     targets.forEach(function (el) {
@@ -691,47 +689,6 @@
     }
   });
 
-
-  /* ------------------------------------------
-     7. CONTACT FORM
-     Basic client-side validation
-     ------------------------------------------ */
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById('contactName').value.trim();
-      const email = document.getElementById('contactEmail').value.trim();
-      const message = document.getElementById('contactMessage').value.trim();
-
-      // Simple validation
-      if (!name || !email || !message) {
-        formStatus.textContent = 'Please fill in all fields.';
-        formStatus.className = 'form-status error';
-        return;
-      }
-
-      // Basic email format check
-      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(email)) {
-        formStatus.textContent = 'Please enter a valid email address.';
-        formStatus.className = 'form-status error';
-        return;
-      }
-
-      // Success feedback (no backend — replace with your form handler)
-      formStatus.textContent = 'Message sent successfully! (Demo — connect a backend to make this functional)';
-      formStatus.className = 'form-status success';
-      contactForm.reset();
-
-      // Clear message after 5 seconds
-      setTimeout(function () {
-        formStatus.textContent = '';
-        formStatus.className = 'form-status';
-      }, 5000);
-    });
-  }
 
 
   /* ------------------------------------------
