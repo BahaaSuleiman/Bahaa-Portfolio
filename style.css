@@ -420,6 +420,13 @@ input, textarea {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.hero-scroll-indicator.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .hero-scroll-indicator span {

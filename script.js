@@ -22,6 +22,7 @@
   const modal = document.getElementById('projectModal');
   const modalClose = document.getElementById('modalClose');
   const modalContent = document.getElementById('modalContent');
+  const scrollIndicator = document.querySelector('.hero-scroll-indicator');
 
 
   /* ------------------------------------------
@@ -107,6 +108,15 @@
       navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
     } else {
       navbar.style.boxShadow = 'none';
+    }
+
+    // Hide scroll indicator as soon as user scrolls down
+    if (scrollIndicator) {
+      if (scrollY > 0) {
+        scrollIndicator.classList.add('hidden');
+      } else {
+        scrollIndicator.classList.remove('hidden');
+      }
     }
 
     lastScroll = scrollY;
@@ -319,8 +329,8 @@
       const now = Date.now();
       const isDark = html.getAttribute('data-theme') === 'dark';
       const strokeColor = isDark ? '255, 255, 255' : '0, 0, 0';
-      const fadeTime = 2000;     // 2 seconds total lifetime
-      const fadeDuration = 1800;  // fade over almost the full duration for a smooth trail
+      const fadeTime = 1000;     // 1 second total lifetime
+      const fadeDuration = 900;  // fade over almost the full duration for a smooth trail
 
       // Remove fully expired temporary strokes
       strokes = strokes.filter(function (stroke) {
